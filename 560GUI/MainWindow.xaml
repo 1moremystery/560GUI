@@ -8,9 +8,18 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Test"/>
+            <MenuItem Header="View">
+                <MenuItem Header="Customers" Click="ViewCustomersClick"/>
+                <MenuItem Header="Products" Checked="ViewProductsClick"/>
+            </MenuItem>
+
+            <MenuItem Header="Add">
+                <MenuItem Header="Customer" Click="AddCustomerClick"/>
+                <MenuItem Header="Product" Click="AddProductClick"/>
+            </MenuItem>
+            <MenuItem Header="debug" Click="debugClick"/>
         </Menu>
-        <DataGrid DockPanel.Dock="Bottom">
+        <DataGrid DockPanel.Dock="Bottom" x:Name="uxDataGrid">
             
         </DataGrid>
     </DockPanel> 
