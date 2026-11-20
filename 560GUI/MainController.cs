@@ -6,6 +6,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 
 namespace _560GUI
@@ -57,6 +58,34 @@ namespace _560GUI
                     while (reader.Read())
                     {
                         data.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetDateTime(2)));
+                    }
+                }
+            }
+            return data;
+        }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            List<Product> data = new();
+            string q = "SELECT P.ProductID, PT.ProductTypeName,P.ProductName, B.BrandName, P.QuantityOnHand, P.SellPrice, S.SupplierName,P.BulkPrice FROM Products P JOIN ProductTypes PT ON PT.ProductTypeID = P.ProductTypeID JOIN Brands B ON B.BrandID = P.BrandID JOIN Suppliers S ON S.SupplierID = P.SupplierID;";
+            using (SqlCommand command = new(q, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Product prod = new()
+                        {
+                            Id = reader.GetInt32(0),
+                            Type = reader.GetString(1),
+                            Name = reader.GetString(2),
+                            BrandName = reader.GetString(3),
+                            QuantityOnHand = reader.GetInt32(4),
+                            SellPrice = reader.GetDecimal(5),
+                            SupplierName = reader.GetString(6),
+                            BulkPrice = reader.GetDecimal(7)
+                        };
+                        data.Add(prod);
                     }
                 }
             }

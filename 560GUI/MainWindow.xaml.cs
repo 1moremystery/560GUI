@@ -31,12 +31,12 @@ namespace _560GUI
 
         private void ViewTop10CustomersClick(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void ViewAllProductsClick(object sender, RoutedEventArgs e)
         {
-
+            uxDataGrid.ItemsSource = controller.GetAllProducts();
         }
 
         private void ViewBestSellingBySupplierClick(object sender, RoutedEventArgs e)
