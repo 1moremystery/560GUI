@@ -19,9 +19,9 @@ namespace _560GUI
             connection = new("Data Source=(localdb)\\MSSQLLocalDb;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Application Name=\"SQL Server Management Studio\";Command Timeout=0;Initial Catalog=CIS560");
         }
 
-        public async Task<object[,]> TestQuery()
+        public async Task<object[]> TestQuery()
         {
-            object[,] data = new object[10,10];
+            object[] data = new object[2];
             string q = "SELECT * FROM Clubs.Club;";
             using( SqlCommand command = new(q,connection))
             {
@@ -31,10 +31,13 @@ namespace _560GUI
                     int row = 0;
                     while(reader.Read())
                     {
-                        for (int i = 0; i < 5; i++)
-                        {
-                            data[row,i] = reader.GetValue(i);
-                        }
+                        TestObject test = new();
+                        test.ClubId = reader.GetValue(0);
+                        test.Name = reader.GetValue(1);
+                        test.Purpose = reader.GetValue(2);
+                        test.CreatedOn = reader.GetValue(3);
+                        test.UpdatedOn = reader.GetValue(4);
+                        data[row] = test;
                         row++;
                     }
                 }

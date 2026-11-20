@@ -46,8 +46,8 @@ namespace _560GUI
 
         private async void debugClick(object sender, RoutedEventArgs e)
         {
-            object[,] data = await controller.TestQuery();
-            //for(int row = 0; row < data.GetLength(0); row++)
+            object[] data = await controller.TestQuery();
+            uxDataGrid.ItemsSource = data;
             //{
             //    for(int col = 0; col < data.GetLength(1); col++)
             //    {
