@@ -27,7 +27,6 @@
                 <MenuItem Header="Customer" Click="AddCustomerClick"/>
                 <MenuItem Header="Product" Click="AddProductClick"/>
             </MenuItem>
-            <MenuItem Header="debug" Click="debugClick"/>
         </Menu>
         
         <DataGrid DockPanel.Dock="Bottom" x:Name="uxDataGrid"/>

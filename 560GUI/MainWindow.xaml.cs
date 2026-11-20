@@ -63,22 +63,5 @@ namespace _560GUI
         {
             controller.AddProduct();
         }
-
-        private async void debugClick(object sender, RoutedEventArgs e)
-        {
-            object[] data = await controller.TestQuery();
-            uxDataGrid.ItemsSource = data;
-            //{
-            //    for(int col = 0; col < data.GetLength(1); col++)
-            //    {
-            //        object? item = data[row, col];
-            //        if (item == null) continue;
-
-            //    }
-
-            //}
-        }
-
-
     }
 }
