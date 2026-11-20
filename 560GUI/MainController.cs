@@ -64,6 +64,27 @@ namespace _560GUI
             return data;
         }
 
+        public IEnumerable<Top10Customer> GetTop10Customers()
+        {
+            List<Top10Customer> data = new();
+            using SqlCommand command = new("EXECUTE GetTopCustomers '01-01-2000','12-31-2100';", connection);
+            using SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Top10Customer c = new()
+                {
+                    Id = reader.GetInt32(0),
+                    Name = reader.GetString(1),
+                    AccountOpenedDate = reader.GetDateTime(2),
+                    TotalOrders = reader.GetInt32(3),
+                    CommonlyPurchasedProduct = reader.GetString(4),
+                    QuantityPurchased = reader.GetInt32(5)
+                };
+                data.Add(c);
+            }
+            return data;
+        }
+
         public IEnumerable<Product> GetAllProducts()
         {
             List<Product> data = new();
