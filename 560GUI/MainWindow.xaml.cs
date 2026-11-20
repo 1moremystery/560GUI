@@ -51,7 +51,7 @@ namespace _560GUI
 
         private void ViewMonthlySalesProductTypeClick(object sender, RoutedEventArgs e)
         {
-
+            uxDataGrid.ItemsSource = controller.GetMonthlyProductTypeSales();
         }
 
         private void AddCustomerClick(object sender, RoutedEventArgs e)

@@ -155,5 +155,26 @@ namespace _560GUI
             }
             return data;
         }
+
+        public IEnumerable<ProductTypeSales> GetMonthlyProductTypeSales()
+        {
+            List<ProductTypeSales> data = new();
+            using SqlCommand command = new("EXECUTE GetMonthlyProductTypeSales '12-31-2026';", connection);
+            using SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ProductTypeSales prod = new()
+                {
+                    Type = reader.GetString(0),
+                    TotalSales = reader.GetDecimal(1),
+                    Month = reader.GetInt32(2),
+                    Year = reader.GetInt32(3),
+                    QuantitySold = reader.GetInt32(4),
+                    MonthlyRank = reader.GetInt64(5)
+                };
+                data.Add(prod);
+            }
+            return data;
+        }
     }
 }
