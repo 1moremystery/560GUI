@@ -1,35 +1,36 @@
-﻿using System;
+﻿using _560GUI.DataClasses;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
 
 
 namespace _560GUI
 {
     public class MainController
     {
-        
-        SqlConnection connection; 
+
+        SqlConnection connection;
 
         public MainController()
         {
             connection = new("Data Source=(localdb)\\MSSQLLocalDb;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Application Name=\"SQL Server Management Studio\";Command Timeout=0;Initial Catalog=CIS560");
+            connection.Open();
         }
 
         public async Task<object[]> TestQuery()
         {
             object[] data = new object[2];
             string q = "SELECT * FROM Clubs.Club;";
-            using( SqlCommand command = new(q,connection))
+            using (SqlCommand command = new(q, connection))
             {
-                connection.Open();
-                using(SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
                     int row = 0;
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         TestObject test = new();
                         test.ClubId = reader.GetValue(0);
@@ -39,6 +40,23 @@ namespace _560GUI
                         test.UpdatedOn = reader.GetValue(4);
                         data[row] = test;
                         row++;
+                    }
+                }
+            }
+            return data;
+        }
+
+
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            List<Customer> data = new();
+            using (SqlCommand command = new("SELECT CustomerID, CustomerName, AccountOpenedDate FROM Customers", connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        data.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetDateTime(2)));
                     }
                 }
             }

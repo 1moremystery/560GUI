@@ -26,7 +26,7 @@ namespace _560GUI
 
         private void ViewAllCustomersClick(object sender, RoutedEventArgs e)
         {
-
+            uxDataGrid.ItemsSource = controller.GetAllCustomers();
         }
 
         private void ViewTop10CustomersClick(object sender, RoutedEventArgs e)
