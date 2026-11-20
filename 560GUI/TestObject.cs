@@ -12,7 +12,7 @@ namespace _560GUI
         public object Name { get; set; } = 0;
         public object Purpose { get; set; } = 0;
         public object CreatedOn { get; set; } = 0;
-        public object UpdatedOn{ get; set; } = 0;
-        
+        public object UpdatedOn { get; set; } = 0;
+
     }
 }
