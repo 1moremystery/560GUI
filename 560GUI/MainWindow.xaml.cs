@@ -24,14 +24,34 @@ namespace _560GUI
             controller = new MainController();
         }
 
-        private void ViewCustomersClick(object sender, RoutedEventArgs e)
+        private void ViewAllCustomersClick(object sender, RoutedEventArgs e)
         {
-
+            uxDataGrid.ItemsSource = controller.GetAllCustomers();
         }
 
-        private void ViewProductsClick(object sender, RoutedEventArgs e)
+        private void ViewTop10CustomersClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.ItemsSource = controller.GetTop10Customers();
+        }
 
+        private void ViewAllProductsClick(object sender, RoutedEventArgs e)
+        {
+            uxDataGrid.ItemsSource = controller.GetAllProducts();
+        }
+
+        private void ViewProductSalesClick(object sender, RoutedEventArgs e)
+        {
+            uxDataGrid.ItemsSource = controller.GetAllProductSales();
+        }
+
+        private void ViewBestSellingBySupplierClick(object sender, RoutedEventArgs e)
+        {
+            uxDataGrid.ItemsSource = controller.GetAllSupplierProdSold();
+        }
+
+        private void ViewMonthlySalesProductTypeClick(object sender, RoutedEventArgs e)
+        {
+            uxDataGrid.ItemsSource = controller.GetMonthlyProductTypeSales();
         }
 
         private void AddCustomerClick(object sender, RoutedEventArgs e)
@@ -58,5 +78,7 @@ namespace _560GUI
                 
             //}
         }
+
+        
     }
 }
