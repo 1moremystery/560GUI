@@ -1,3 +1,6 @@
+USE CIS560  
+GO
+
 CREATE OR ALTER PROCEDURE GetProductSales
     @StartDate DATE,
     @StopDate DATE

@@ -40,10 +40,14 @@ namespace _560GUI
             return data;
         }
 
-        public IEnumerable<Top10Customer> GetTop10Customers()
+        //public IEnumerable<Top10Customer> GetTop10Customers()
+        public IEnumerable<Top10Customer> GetTop10Customers(DateTime startDate, DateTime stopDate)
         {
             List<Top10Customer> data = new();
-            using SqlCommand command = new("EXECUTE GetTopCustomers '01-01-2000','12-31-2100';", connection);
+            //using SqlCommand command = new("EXECUTE GetTopCustomers '01-01-2000','12-31-2100';", connection);
+            using SqlCommand command = new("EXECUTE GetTopCustomers @StartDate, @StopDate;", connection);
+            command.Parameters.AddWithValue("@StartDate", startDate.Date);
+            command.Parameters.AddWithValue("@StopDate", stopDate.Date);
             using SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -89,10 +93,14 @@ namespace _560GUI
             return data;
         }
 
-        public IEnumerable<ProductSale> GetAllProductSales()
+        //public IEnumerable<ProductSale> GetAllProductSales()
+        public IEnumerable<ProductSale> GetAllProductSales(DateTime startDate, DateTime stopDate)
         {
             List<ProductSale> data = new();
-            using SqlCommand command = new("EXECUTE GetProductSales '01-01-2000','12-31-2100';", connection);
+            //using SqlCommand command = new("EXECUTE GetProductSales '01-01-2000','12-31-2100';", connection);
+            using SqlCommand command = new("EXECUTE GetProductSales @StartDate, @StopDate;", connection);
+            command.Parameters.AddWithValue("@StartDate", startDate.Date);
+            command.Parameters.AddWithValue("@StopDate", stopDate.Date);
             using SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -110,10 +118,14 @@ namespace _560GUI
             return data;
         }
 
-        public IEnumerable<SupplierProdSold> GetAllSupplierProdSold()
+        //public IEnumerable<SupplierProdSold> GetAllSupplierProdSold()
+        public IEnumerable<SupplierProdSold> GetAllSupplierProdSold(DateTime startDate, DateTime stopDate)
         {
             List<SupplierProdSold> data = new();
-            using SqlCommand command = new("EXECUTE GetBestSellingProductsBySupplier '01-01-2000','12-31-2100';", connection);
+            //using SqlCommand command = new("EXECUTE GetBestSellingProductsBySupplier '01-01-2000','12-31-2100';", connection);
+            using SqlCommand command = new("EXECUTE GetBestSellingProductsBySupplier @StartDate, @StopDate;", connection);
+            command.Parameters.AddWithValue("@StartDate", startDate.Date);
+            command.Parameters.AddWithValue("@StopDate", stopDate.Date);
             using SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -132,10 +144,13 @@ namespace _560GUI
             return data;
         }
 
-        public IEnumerable<ProductTypeSales> GetMonthlyProductTypeSales()
+        //public IEnumerable<ProductTypeSales> GetMonthlyProductTypeSales()
+        public IEnumerable<ProductTypeSales> GetMonthlyProductTypeSales(DateTime endDate)
         {
             List<ProductTypeSales> data = new();
-            using SqlCommand command = new("EXECUTE GetMonthlyProductTypeSales '12-31-2026';", connection);
+            //using SqlCommand command = new("EXECUTE GetMonthlyProductTypeSales '12-31-2026';", connection);
+            using SqlCommand command = new("EXECUTE GetMonthlyProductTypeSales @EndDate;", connection);
+            command.Parameters.AddWithValue("@EndDate", endDate.Date);
             using SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
