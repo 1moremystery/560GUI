@@ -61,7 +61,7 @@ namespace _560GUI
 
         private void AddProductClick(object sender, RoutedEventArgs e)
         {
-
+            controller.AddProduct();
         }
 
         private async void debugClick(object sender, RoutedEventArgs e)

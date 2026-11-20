@@ -189,11 +189,63 @@ namespace _560GUI
             {
                 int i = command.ExecuteNonQuery();
                 MessageBox.Show($"{i} row created");
-            }  
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
+        }
+
+        public void AddProduct()
+        {
+            AddProductDialog dialog = new(this);
+            if (dialog.ShowDialog().GetValueOrDefault())
+            {
+                using SqlCommand command = new($"EXEC CreateProduct '{dialog.ProductName}',{dialog.Quantity},{dialog.BulkPrice},{dialog.SellPrice},'{dialog.SupplierName}','{dialog.BrandName}','{dialog.ProductTypeName}';", connection);
+                try
+                {
+                    int i = command.ExecuteNonQuery();
+                    MessageBox.Show($"{i} row created");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets and returns all supplier names, brand names, and product type names
+        /// </summary>
+        public void GetSuppliersBrandProductType(out List<string> suppliers, out List<string> brands, out List<string> productType)
+        {
+            suppliers = new();
+            brands = new();
+            productType = new();
+
+            using SqlCommand command = new("SELECT SupplierName FROM Suppliers", connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                suppliers.Add(reader.GetString(0));
+            }
+            reader.Close();
+
+            command.CommandText = "SELECT BrandName FROM Brands";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                brands.Add(reader.GetString(0));
+            }
+            reader.Close();
+
+            command.CommandText = "SELECT ProductTypeName FROM ProductTypes";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                productType.Add(reader.GetString(0));
+            }
+            reader.Close();
         }
     }
 }
