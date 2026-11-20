@@ -10,15 +10,29 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="View">
                 <MenuItem Header="Customers" Click="ViewCustomersClick"/>
-                <MenuItem Header="Products" Checked="ViewProductsClick"/>
+                <MenuItem Header="Products" Click="ViewProductsClick"/>
+                <MenuItem Header="Suppliers" Click="ViewSuppliersClick"/>
             </MenuItem>
-
+            <MenuItem Header="Reports">
+                <MenuItem Header="Product Sales by Month" Click="ProductSalesClick"/>
+                <MenuItem Header="Top Customers" Click="TopCustomersClick"/>
+                <MenuItem Header="Best Seller by Supplier" Click="BestSellingBySupplierClick"/>
+                <MenuItem Header="Product Type Month/Month" Click="MonthlyTypeSalesClick"/>
+            </MenuItem>
             <MenuItem Header="Add">
                 <MenuItem Header="Customer" Click="AddCustomerClick"/>
                 <MenuItem Header="Product" Click="AddProductClick"/>
             </MenuItem>
             <MenuItem Header="debug" Click="debugClick"/>
         </Menu>
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Start:" VerticalAlignment="Center"/>
+            <DatePicker x:Name="uxStartDate" SelectedDate="2025-11-01" Margin="5,0,15,0"/>
+            <TextBlock Text="Stop / End:" VerticalAlignment="Center"/>
+            <DatePicker x:Name="uxStopDate" SelectedDate="2026-11-17" Margin="5,0"/>
+        </StackPanel>
+
         <DataGrid DockPanel.Dock="Bottom" x:Name="uxDataGrid">
             
         </DataGrid>
