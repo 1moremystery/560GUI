@@ -26,7 +26,7 @@ namespace _560GUI.Dialogs
         public int Quantity { get; private set; }
         public decimal SellPrice { get; private set; }
         public decimal BulkPrice { get; private set; }
-        
+
         MainController controller;
         public AddProductDialog(MainController ctrl)
         {
@@ -42,7 +42,7 @@ namespace _560GUI.Dialogs
             List<string> brands;
             List<string> productTypes;
             controller.GetSuppliersBrandProductType(out supplier, out brands, out productTypes);
-            
+
             uxSupplierBox.ItemsSource = supplier;
             uxBrandBox.ItemsSource = brands;
             uxProductTypeBox.ItemsSource = productTypes;
@@ -51,11 +51,11 @@ namespace _560GUI.Dialogs
 
         bool Verify()
         {
-            if( uxSupplierBox.SelectedIndex < 0 || uxBrandBox.SelectedIndex < 0 || uxProductTypeBox.SelectedIndex < 0 || string.IsNullOrEmpty(uxNameBox.Text)) return false;
-            if (!int.TryParse(uxQuantity.Text, out int q) || !decimal.TryParse(uxBulkPrice.Text,out decimal bp) || !decimal.TryParse(uxSellPrice.Text, out decimal sp)) return false;
+            if (uxSupplierBox.SelectedIndex < 0 || uxBrandBox.SelectedIndex < 0 || uxProductTypeBox.SelectedIndex < 0 || string.IsNullOrEmpty(uxNameBox.Text)) return false;
+            if (!int.TryParse(uxQuantity.Text, out int q) || !decimal.TryParse(uxBulkPrice.Text, out decimal bp) || !decimal.TryParse(uxSellPrice.Text, out decimal sp)) return false;
             Quantity = Math.Abs(q);
-            BulkPrice = Math.Round(Math.Abs(bp),2);
-            SellPrice = Math.Round(Math.Abs(sp),2);
+            BulkPrice = Math.Round(Math.Abs(bp), 2);
+            SellPrice = Math.Round(Math.Abs(sp), 2);
             return true;
         }
 

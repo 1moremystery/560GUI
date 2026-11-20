@@ -13,6 +13,6 @@ namespace _560GUI.DataClasses
         public DateTime AccountOpenedDate { get; set; }
         public int TotalOrders { get; set; }
         public string CommonlyPurchasedProduct { get; set; }
-        public int QuantityPurchased {  get; set; }
+        public int QuantityPurchased { get; set; }
     }
 }

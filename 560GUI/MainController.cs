@@ -24,32 +24,6 @@ namespace _560GUI
             connection.Open();
         }
 
-        public async Task<object[]> TestQuery()
-        {
-            object[] data = new object[2];
-            string q = "SELECT * FROM Clubs.Club;";
-            using (SqlCommand command = new(q, connection))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    int row = 0;
-                    while (reader.Read())
-                    {
-                        TestObject test = new();
-                        test.ClubId = reader.GetValue(0);
-                        test.Name = reader.GetValue(1);
-                        test.Purpose = reader.GetValue(2);
-                        test.CreatedOn = reader.GetValue(3);
-                        test.UpdatedOn = reader.GetValue(4);
-                        data[row] = test;
-                        row++;
-                    }
-                }
-            }
-            return data;
-        }
-
-
         public IEnumerable<Customer> GetAllCustomers()
         {
             List<Customer> data = new();
