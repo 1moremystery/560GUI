@@ -24,12 +24,27 @@ namespace _560GUI
             controller = new MainController();
         }
 
-        private void ViewCustomersClick(object sender, RoutedEventArgs e)
+        private void ViewAllCustomersClick(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void ViewProductsClick(object sender, RoutedEventArgs e)
+        private void ViewTop10CustomersClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewAllProductsClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewBestSellingBySupplierClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewMonthlySalesProductTypeClick(object sender, RoutedEventArgs e)
         {
 
         }
@@ -58,5 +73,7 @@ namespace _560GUI
                 
             //}
         }
+
+        
     }
 }

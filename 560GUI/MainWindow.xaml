@@ -9,8 +9,17 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="View">
-                <MenuItem Header="Customers" Click="ViewCustomersClick"/>
-                <MenuItem Header="Products" Checked="ViewProductsClick"/>
+                <MenuItem Header="Customers">
+                    <MenuItem Header="All Customers" Click="ViewAllCustomersClick"/>
+                    <MenuItem Header="Top 10 Customers" Click="ViewTop10CustomersClick"/>
+                </MenuItem>
+                <MenuItem Header="Products">
+                    <MenuItem Header="All Products" Click="ViewAllProductsClick"/>
+                    <MenuItem Header="Best Selling By Supplier" Click="ViewBestSellingBySupplierClick"/>
+                </MenuItem>
+                <MenuItem Header="Product Type">
+                    <MenuItem Header="Monthly Product Type Sales" Click="ViewMonthlySalesProductTypeClick" />
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Add">
@@ -19,8 +28,7 @@
             </MenuItem>
             <MenuItem Header="debug" Click="debugClick"/>
         </Menu>
-        <DataGrid DockPanel.Dock="Bottom" x:Name="uxDataGrid">
-            
-        </DataGrid>
+        
+        <DataGrid DockPanel.Dock="Bottom" x:Name="uxDataGrid"/>
     </DockPanel> 
 </Window>
