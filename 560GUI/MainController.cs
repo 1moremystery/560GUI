@@ -1,4 +1,5 @@
 ﻿using _560GUI.DataClasses;
+using _560GUI.Dialogs;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 
 
@@ -175,6 +177,75 @@ namespace _560GUI
                 data.Add(prod);
             }
             return data;
+        }
+
+        public void AddCustomer()
+        {
+            AddCustomerDialog dialog = new();
+            if (!dialog.ShowDialog().GetValueOrDefault() || string.IsNullOrEmpty(dialog.CustomerName)) return;
+
+            using SqlCommand command = new($"EXEC CreateCustomer '{dialog.CustomerName}';", connection);
+            try
+            {
+                int i = command.ExecuteNonQuery();
+                MessageBox.Show($"{i} row created");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        public void AddProduct()
+        {
+            AddProductDialog dialog = new(this);
+            if (dialog.ShowDialog().GetValueOrDefault())
+            {
+                using SqlCommand command = new($"EXEC CreateProduct '{dialog.ProductName}',{dialog.Quantity},{dialog.BulkPrice},{dialog.SellPrice},'{dialog.SupplierName}','{dialog.BrandName}','{dialog.ProductTypeName}';", connection);
+                try
+                {
+                    int i = command.ExecuteNonQuery();
+                    MessageBox.Show($"{i} row created");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets and returns all supplier names, brand names, and product type names
+        /// </summary>
+        public void GetSuppliersBrandProductType(out List<string> suppliers, out List<string> brands, out List<string> productType)
+        {
+            suppliers = new();
+            brands = new();
+            productType = new();
+
+            using SqlCommand command = new("SELECT SupplierName FROM Suppliers", connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                suppliers.Add(reader.GetString(0));
+            }
+            reader.Close();
+
+            command.CommandText = "SELECT BrandName FROM Brands";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                brands.Add(reader.GetString(0));
+            }
+            reader.Close();
+
+            command.CommandText = "SELECT ProductTypeName FROM ProductTypes";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                productType.Add(reader.GetString(0));
+            }
+            reader.Close();
         }
     }
 }
