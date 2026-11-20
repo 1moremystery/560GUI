@@ -46,7 +46,7 @@ namespace _560GUI
 
         private void ViewBestSellingBySupplierClick(object sender, RoutedEventArgs e)
         {
-            
+            uxDataGrid.ItemsSource = controller.GetAllSupplierProdSold();
         }
 
         private void ViewMonthlySalesProductTypeClick(object sender, RoutedEventArgs e)
