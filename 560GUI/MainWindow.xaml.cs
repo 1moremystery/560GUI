@@ -24,34 +24,54 @@ namespace _560GUI
             controller = new MainController();
         }
 
+        void SetReadOnly()
+        {
+            foreach (var item in uxDataGrid.Columns)
+            {
+                item.IsReadOnly = true;
+            }
+        }
+
         private void ViewAllCustomersClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.CancelEdit();
             uxDataGrid.ItemsSource = controller.GetAllCustomers();
+            SetReadOnly();
         }
 
         private void ViewTop10CustomersClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.CancelEdit();
             uxDataGrid.ItemsSource = controller.GetTop10Customers();
+            SetReadOnly();
         }
 
         private void ViewAllProductsClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.CancelEdit();
             uxDataGrid.ItemsSource = controller.GetAllProducts();
+            SetReadOnly();
         }
 
         private void ViewProductSalesClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.CancelEdit();
             uxDataGrid.ItemsSource = controller.GetAllProductSales();
+            SetReadOnly();
         }
 
         private void ViewBestSellingBySupplierClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.CancelEdit();
             uxDataGrid.ItemsSource = controller.GetAllSupplierProdSold();
+            SetReadOnly();
         }
 
         private void ViewMonthlySalesProductTypeClick(object sender, RoutedEventArgs e)
         {
+            uxDataGrid.CancelEdit();
             uxDataGrid.ItemsSource = controller.GetMonthlyProductTypeSales();
+            SetReadOnly();
         }
 
         private void AddCustomerClick(object sender, RoutedEventArgs e)
