@@ -1,4 +1,5 @@
 ﻿using _560GUI.DataClasses;
+using _560GUI.Dialogs;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 
 
@@ -175,6 +177,23 @@ namespace _560GUI
                 data.Add(prod);
             }
             return data;
+        }
+
+        public void AddCustomer()
+        {
+            AddCustomerDialog dialog = new();
+            if (!dialog.ShowDialog().GetValueOrDefault() || string.IsNullOrEmpty(dialog.CustomerName)) return;
+
+            using SqlCommand command = new($"EXEC CreateCustomer '{dialog.CustomerName}';", connection);
+            try
+            {
+                int i = command.ExecuteNonQuery();
+                MessageBox.Show($"{i} row created");
+            }  
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
     }
 }

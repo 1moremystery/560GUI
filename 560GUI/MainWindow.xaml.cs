@@ -56,7 +56,7 @@ namespace _560GUI
 
         private void AddCustomerClick(object sender, RoutedEventArgs e)
         {
-
+            controller.AddCustomer();
         }
 
         private void AddProductClick(object sender, RoutedEventArgs e)
