@@ -112,5 +112,26 @@ namespace _560GUI
             }
             return data;
         }
+
+        public IEnumerable<ProductSale> GetAllProductSales()
+        {
+            List<ProductSale> data = new();
+            using SqlCommand command = new("EXECUTE GetProductSales '01-01-2000','12-31-2100';", connection);
+            using SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                ProductSale prod = new()
+                {
+                    Id = reader.GetInt32(0),
+                    Name = reader.GetString(1),
+                    Year = reader.GetInt32(2),
+                    Month = reader.GetInt32(3),
+                    QuantitySold = reader.GetInt32(4),
+                    TotalSales = reader.GetDecimal(5)
+                };
+                data.Add(prod);
+            }
+            return data;
+        }
     }
 }

@@ -15,6 +15,7 @@
                 </MenuItem>
                 <MenuItem Header="Products">
                     <MenuItem Header="All Products" Click="ViewAllProductsClick"/>
+                    <MenuItem Header="Product Sales" Click="ViewProductSalesClick"/>
                     <MenuItem Header="Best Selling By Supplier" Click="ViewBestSellingBySupplierClick"/>
                 </MenuItem>
                 <MenuItem Header="Product Type">
